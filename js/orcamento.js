@@ -2688,6 +2688,26 @@ function openPersonalizadoForm() {
     window.location.href = 'personalizado.html';
 }
 
+async function salvarClienteNoBanco(nome, email, telefone) {
+    try {
+        const { data, error } = await sbClient
+            .from('clientes')
+            .insert([
+                { 
+                    nome: nome, 
+                    email: email, 
+                    telefone: telefone 
+                }
+            ]);
+
+        if (error) throw error;
+        console.log("Cliente salvo com sucesso!");
+
+    } catch (err) {
+        console.error("Erro ao salvar cliente:", err.message);
+    }
+}
+
 // ============================================
 // LISTENER PARA ATUALIZAÇÕES EXTERNAS
 // ============================================
